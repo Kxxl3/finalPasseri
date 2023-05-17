@@ -1,0 +1,21 @@
+
+%html
+  %head
+    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title AppPasseri
+    %meta{content: "width=device-width,initial-scale=1", name: "viewport"}/
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+  %body.background-red
+    .hero
+      .hero-body
+        .columns
+          .column.is-half.is-offset-one-quarter
+            .has-text-centered
+              %h1.title.is-1.main-title Passeri
+              %br
+              
+            .card
+              .card-content
+                = yield

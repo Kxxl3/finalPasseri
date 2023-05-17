@@ -1,0 +1,8 @@
+- if devise_mapping.omniauthable?
+  - resource_class.omniauth_providers.each do |provider|
+    - case provider.to_s
+      - when "google_oauth2"
+        = link_to omniauth_authorize_path(resource_name, provider), class: 'google-button' do 
+          = fa_icon 'google'
+          %span Ingresa con Google
+          

@@ -1,0 +1,14 @@
+%h2.title.is-3 ¿Olvidaste tu contraseña?
+
+= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+  = devise_error_messages!
+
+  .field
+    = f.label :email, "Correo electrónico", class: "label"
+    .control
+      = f.email_field :email, autofocus: true, autocomplete: "email", class: "input"
+
+  .actions 
+    = f.submit "Recuperar Contraseña", class: "button is-info is-rounded is-fullwidth"
+  
+= render "devise/shared/links"
