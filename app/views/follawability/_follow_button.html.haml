@@ -1,0 +1,4 @@
+- if current_user&.following?(@user)
+  = button_to 'Unfollow', unfollow_user_path(@user), method: :post, class: "button is-danger is-fullwidth"
+- else
+  = button_to "Follow", follow_user_path(@user), method: :post, class: "button is-primary is-fullwidth"

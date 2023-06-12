@@ -32,6 +32,14 @@ gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem 'figaro'
 gem 'font-awesome-rails'
+gem 'activestorage', '~> 6.0'
+gem 'rails_admin'
+gem 'friendly_id', '~> 5.4.0'
+gem 'acts_as_votable'
+gem 'followability', github: 'nejdetkadir/followability', branch: 'main'
+gem 'mime-types'
+gem 'turbo-rails'
+
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

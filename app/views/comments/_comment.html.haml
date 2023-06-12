@@ -1,0 +1,47 @@
+- if cookies[:theme] == "dark"
+  .box.comment-box.is-rounded.is-widescreen.is-centered.has-background-dark
+    .media
+      .media-left.pr-5
+        .image.is-60x60
+          .figure.image.is-rounded.is-48x48
+            - if comment.user.user_photo.attached?
+              = link_to(image_tag(  comment.user.user_photo, class: ""), "#")
+            - else
+              = link_to(image_tag("https://bulma.io/images/placeholders/64x64.png", alt: "Image", class: "image-zoom"), "#")
+            = link_to profile_path(comment.user) do
+              = print_username(comment.user)
+      .media-content
+        .content.has-text-centered
+          %p.comment-user.has-text-white
+            = comment.content
+      .media-right.pr-5
+        %p.comment-actions
+          - if comment.user == current_user 
+            = button_to post_comment_path(comment.post, comment), method: :delete, data: { confirm: "¿Estás seguro de que deseas eliminar este comentario?" } do
+              %span.icon
+                = fa_icon "close"
+- else 
+  .box.comment-box.is-rounded.is-widescreen.is-centered
+    .media
+      .media-left.pr-5
+        .image.is-60x60
+          .figure.image.is-rounded.is-48x48
+            - if comment.user.user_photo.attached?
+              = link_to(image_tag(  comment.user.user_photo, class: ""), "#")
+            - else
+              = link_to(image_tag("https://bulma.io/images/placeholders/64x64.png", alt: "Image", class: "image-zoom"), "#")
+            = link_to profile_path(comment.user) do
+              = print_username(comment.user)
+      .media-content
+        .content.has-text-centered
+          %p.comment-user
+            = comment.content
+      .media-right.pr-5
+        %p.comment-actions
+          - if comment.user == current_user 
+            = button_to post_comment_path(comment.post, comment), method: :delete, data: { confirm: "¿Estás seguro de que deseas eliminar este comentario?" } do
+              %span.icon
+                = fa_icon "close"
+
+        
+          

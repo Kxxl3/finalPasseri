@@ -1,0 +1,10 @@
+.tabs
+  %ul
+    %li.is-active
+      %a{ href: para_ti_path } Para ti
+    %li
+      %a{ href: seguidos_path } Seguidos
+.tab-content
+  .tab-pane.is-active
+    = render 'partials/para_ti'
+

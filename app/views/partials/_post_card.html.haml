@@ -1,0 +1,94 @@
+- if cookies[:theme] == "dark"
+  .box.has-background-black
+    %article.media
+      .media-left
+        %figure.image.is-64x64
+          - if post.photo.attached?
+            = link_to(image_tag(post.photo, class: "image-zoom"), "#")
+          - else
+            = link_to(image_tag("https://bulma.io/images/placeholders/64x64.png", alt: "Image", class: "image-zoom"), "#")
+    
+      .media-content
+        .content
+          %p
+            %strong
+              = link_to post.title, post_path(post)
+            %small.has-text-weight-semibold
+              = link_to profile_path(post.user) do
+                = print_username(post.user)
+            %small.is-italic.is-pulled-right= time_ago_in_words(post.created_at)
+            %br
+            %audio{controls: true}
+              %source{src: "#{rails_blob_url(post.file)}", type: "#{post.file.content_type}"}
+        %nav.level.is-mobile.post-icons-container
+          .level-left
+            - if current_user.liked? post
+              = button_to upvote_post_path(post), method: :patch, class: 'button is-danger is-rounded mr-2' do
+                %span.icon
+                  = fa_icon "heart-o"
+            - else
+              = button_to upvote_post_path(post), method: :patch, class: 'button is-secondary is-rounded mr-2' do
+                %span.icon
+                  = fa_icon "heart-o"
+          
+            = link_to post_path(post), class: "button is-secondary is-rounded" do
+              %span.icon
+                = fa_icon "comment"
+              %span.ml-1 Comentar
+          .level-right.has-text-primary
+            = fa_icon 'heart', id: "like-button-#{post.id}"
+            %span= post.get_upvotes.size
+            = fa_icon 'comment', class: "ml-3"
+            %span.no-spacing= post.comments.size
+            - if post.user == current_user
+              = button_to post_path(post), method: :delete, data: { confirm: "¿Estás seguro de que deseas eliminar este post?" }, class: 'button is-danger is-rounded ml-5 p-1' do
+                = fa_icon "trash"
+
+- else
+  .box.has-background-white
+    %article.media
+      .media-left
+        %figure.image.is-64x64
+          - if post.photo.attached?
+            = link_to(image_tag(post.photo, class: "image-zoom"), "#")
+          - else
+            = link_to(image_tag("https://bulma.io/images/placeholders/64x64.png", alt: "Image", class: "image-zoom"), "#")
+
+      .media-content
+        .content
+          %p
+            %strong
+              = link_to post.title, post_path(post)
+            %small.has-text-weight-semibold
+              = link_to profile_path(post.user) do
+                = print_username(post.user)
+            %small.is-italic.is-pulled-right= time_ago_in_words(post.created_at)
+            %br
+            %audio{controls: true}
+              %source{src: "#{rails_blob_url(post.file)}", type: "#{post.file.content_type}"}
+        %nav.level.is-mobile.post-icons-container
+          .level-left
+            = turbo_frame_tag "vote_frame_#{post.id}" do
+              .vote
+                - if current_user.liked? post
+                  = button_to upvote_post_path(post), method: :patch, remote: true, class: 'button is-danger is-rounded mr-2' do
+                    %span.icon
+                      = fa_icon "heart-o"
+                - else
+                  = button_to upvote_post_path(post), method: :patch, remote: true, class: 'button is-secondary is-rounded mr-2' do
+                    %span.icon
+                      = fa_icon "heart-o"
+
+
+            = link_to post_path(post), class: "button is-secondary is-rounded" do
+              %span.icon
+                = fa_icon "comment"
+              %span.ml-1 Comentar
+          .level-right.has-text-secondary
+            = fa_icon 'heart', id: "like-button-#{post.id}"
+            %span.no-spacing= post.get_upvotes.size
+            = fa_icon 'comment', class: "ml-3"
+            %span.no-spacing= post.comments.size
+            - if post.user == current_user
+              = button_to post_path(post), method: :delete, data: { confirm: "¿Estás seguro de que deseas eliminar este post?" }, class: 'button is-danger is-rounded ml-5 p-1' do
+                = fa_icon "trash"

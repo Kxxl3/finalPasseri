@@ -1,0 +1,44 @@
+%nav.navbar.is-fixed-top(role="navigation" aria-label="main navigation")
+  .container
+    .navbar-brand
+      %a.navbar-item(href="/")
+        %span.title.is-2.title-header.mv10 Passeri
+
+      %button.button.navbar-burger
+        %span
+        %span
+        %span
+
+    .navbar-menu
+      .navbar-start
+        .navbar-item
+          = link_to "Publica", new_post_path, class: "mr-5"
+          = link_to(liked_posts_path(@user)) do 
+            %span.icon
+              = fa_icon "heart"
+
+      .navbar-end
+        .navbar-item
+          %figure.image.is-32x32.mr10
+          - if current_user.user_photo.attached?
+            = link_to(image_tag( current_user.user_photo, class: "avatar-nav"), "#")
+          - else
+            = link_to(image_tag("https://bulma.io/images/placeholders/64x64.png", alt: "Image", class: "image-zoom"), "#")
+          @#{current_user.name}
+        .navbar-item
+          = link_to "Perfil" , profile_path(current_user.id)
+        .navbar-item
+          = button_to destroy_user_session_path, method: :delete, class: 'button is-danger is-rounded ml-5 p-1' do
+            %span Cerrar sesión
+            %span.icon
+              = fa_icon " fa-arrow-up-left-from-circle"
+              %p
+
+        .navbar-item
+          - if cookies[:theme] == 'light'
+            = link_to set_theme_path(theme: 'dark') do
+              = fa_icon "moon-o"
+          - else
+            = link_to set_theme_path(theme: 'light') do
+              = fa_icon "sun-o"
+

@@ -1,0 +1,5 @@
+%div
+  - flash.each do |key, value|
+    %div(class="#{flash_class(key)} fade in pv4")
+      %a.delete(data-dismiss="alert" href="#") ×
+      %h4.title.is-5= value

@@ -5,6 +5,17 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :omniauthable, 
          :omniauth_providers => [:google_oauth2]
 
+  
+        
+ 
+ followability    
+ acts_as_voter
+ has_many :posts
+ has_many :comments
+ has_one_attached :user_photo
+ has_one_attached :cover
+
+
   def self.from_omniauth(access_token)
     user = User.where(email: access_token.info.email).first
     unless user
@@ -13,8 +24,10 @@ class User < ApplicationRecord
         password: Devise.friendly_token[0, 20]
       )
     end
+
+
+   
     user.name = access_token.info.name
-    user.avatar = access_token.info.image
     user.uid = access_token.uid
     user.provider = access_token.provider
     user.save

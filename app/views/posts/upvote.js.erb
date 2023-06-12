@@ -1,0 +1,10 @@
+<%- if @note.persisted? %>
+    var parentNode = document.querySelector(".level-left .vote")
+    var div = document.createElement("div")
+    div.innerHTML = "<%= j render 'tasks/notes/note', note: @note %>"
+    parentNode.appendChild(div)
+    window.scrollTo({
+        top: window.innerHeight,
+        behavior: "smooth"
+    });
+<% end %>

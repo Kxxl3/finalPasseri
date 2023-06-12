@@ -1,0 +1,18 @@
+.container.is-flex
+  .row.justify-content-center
+    .col-md-6
+      = render "partials/profile_card", user: @user
+    .col-md-12
+      .columns
+        .column
+          .has-background-gray.p-4
+            - if @user.posts.size > 0
+              - @user.posts.each do |post|
+                = render "partials/post_card", post: post
+            - else
+              .notification.is-danger
+                .container.is-centered
+                  .notification-content
+                    %strong Aun no tienes ningún post
+
+        

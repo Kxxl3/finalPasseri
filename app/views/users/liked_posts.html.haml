@@ -1,0 +1,8 @@
+%h1.has-text-white.is-size-1 Mis favoritos 
+.columns
+  .column.is-half.is-offset-one-quarter
+    - if @liked_posts.size > 0
+      - @liked_posts.each do |post|
+        = render "partials/post_card", post: post
+    - else
+      %h1.has-text-white.is-size-3.mt-6 Aun no has añadido ningun post a favoritos :(

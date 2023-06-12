@@ -2,7 +2,7 @@
   "name": "app-passeri",
   "private": true,
   "dependencies": {
-    "@rails/actioncable": "^6.0.0",
+    "@rails/actioncable": "^7.0.5",
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
     "bootstrap": "^5.2.3",
@@ -16,5 +16,8 @@
   "version": "0.1.0",
   "devDependencies": {
     "webpack-dev-server": "^3"
+  },
+  "resolutions": {
+    "rails_admin/@fortawesome/fontawesome-free": "^5.15.0"
   }
 }

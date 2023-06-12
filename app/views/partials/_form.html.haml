@@ -1,0 +1,37 @@
+= form_for @post do |f|
+  - if @post.errors.any?
+    %ul.form-errors
+      - @post.errors.full_messages.each do |error|
+        %li.error= error
+
+  .field
+    = f.label :title, "Título", class: "label"
+    .control
+      = f.text_field :title, class: "input", placeholder: "Ingresa el título de la canción"
+
+  .file.is-info.has-name.mb-4.is-fullwidth
+    %label.file-label
+      %input.file-input{name: "resume", type: "file"}/
+      %span.file-cta
+        %span.file-icon
+          %i.fas.fa-cloud-upload-alt
+        %span.file-label
+          Seleccionar archivo de canción
+        = f.file_field :file
+        = f.object.file.blob.filename if f.object.file.attached?
+
+  .file.is-info.has-name.mb-4.is-fullwidth
+    %label.file-label
+      %input.file-input{name: "resume", type: "file"}/
+      %span.file-cta
+        %span.file-icon
+          %i.fas.fa-cloud-upload-alt
+        %span.file-label
+          Seleccionar foto
+        = f.file_field :photo
+        = f.object.photo.blob.filename if f.object.photo.attached?
+
+  .actions
+    = f.submit 'Guardar', class: "button is-primary is-fullwidth"
+    %button.button.is-danger.is-fullwidth{type: "button"}
+      = link_to "Volver atrás", "javascript:history.back()", class: "has-text-white"

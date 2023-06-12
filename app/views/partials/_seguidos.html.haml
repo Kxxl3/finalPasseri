@@ -1,0 +1,6 @@
+- if @following_users.size > 0
+  - @following_users.each do |user|
+    - user.posts.each do |post|
+      = render "partials/post_card", post: post
+- else
+  %h1.has-text-white.is-size-4.mt-6 Aun no sigues a ningun usuario!

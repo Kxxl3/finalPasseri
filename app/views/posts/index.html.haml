@@ -1,0 +1,42 @@
+%br
+%script{src: '/path/to/your/javascript/file.js', type: 'text/javascript'}
+
+.columns
+  .column.is-half.is-offset-one-quarter
+    - @posts.each do |post|
+      .box
+        %article.media
+          .media-left
+            %figure.image.is-64x64
+              - if post.photo.attached?
+                .image.is-64x64
+                  = image_tag post.photo
+              - else
+                .image.is-64x64
+                  = image_tag "https://bulma.io/images/placeholders/64x64.png", alt: "Image"
+          .media-content
+            .content
+              %p
+                %strong
+                  = link_to post.title, post_path(post)
+                %small.has-text-weight-semibold
+                  = print_username(post.user)
+                %small.is-italic.is-pulled-right= time_ago_in_words(post.created_at)
+                %br
+                %audio{controls: true}
+                  %source{src: "#{rails_blob_url(post.file)}", type: "#{post.file.content_type}"}
+            .level.is-container
+              .level-left
+                = button_to upvote_post_path(post), method: :patch, class: 'button is-primary is-rounded mr-2' do
+                  %span.icon
+                    = fa_icon "heart-o"
+                  %span like
+                = link_to post_path(post), class: "button is-secondary is-rounded" do
+                  %span.icon
+                    = fa_icon "comment"
+                  %span  Comentar
+              .level-right
+                = fa_icon 'heart', id: "like-button-#{post.id}"
+                %span.no-spacing= post.get_upvotes.size
+                = fa_icon 'comment', class: "ml-2"
+                %span.no-spacing= post.comments.size
