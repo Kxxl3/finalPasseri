@@ -115,6 +115,7 @@ GEM
       thor (>= 0.14.0, < 2)
     font-awesome-rails (4.7.0.8)
       railties (>= 3.2, < 8.0)
+    foreman (0.87.2)
     friendly_id (5.4.2)
       activerecord (>= 4.0.0)
     globalid (1.1.0)
@@ -343,6 +344,7 @@ DEPENDENCIES
   figaro
   followability!
   font-awesome-rails
+  foreman
   friendly_id (~> 5.4.0)
   hamlit
   hamlit-rails

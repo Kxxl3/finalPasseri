@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
   # Ruta para errores
-  match '/posts', to: 'errors#not_found', via: :all
+  
   match '/users', to: 'errors#not_found', via: :all
 
   # Resto de tus rutas
@@ -31,7 +31,7 @@ Rails.application.routes.draw do
 
   resources :users
   resources :posts
-  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  # mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   authenticated :user do
     root to: 'users#index', as: :authenticated_root

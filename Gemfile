@@ -75,6 +75,8 @@ end
 
 group :production do
   gem 'pg'
+  gem 'puma', '~> 5.0'
+  gem 'foreman'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
