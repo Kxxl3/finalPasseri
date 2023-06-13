@@ -1,0 +1,12 @@
+%article.message.is-danger.mt-4
+  .message-header
+    %p 404
+  .message-body
+    %h1.size-1 Página no encontrada
+    %p
+      = "Lo sentimos,"
+      %strong la página que estás buscando no existe.
+    = link_to(image_tag( asset_path '404-error-page-2952323-2451625.png'), href="/")
+    %p
+      = "Volver a la"
+      %a{ href: root_path } página principal

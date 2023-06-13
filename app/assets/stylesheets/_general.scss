@@ -86,17 +86,11 @@
       color: white;
     }
   
-    .hover-icon,
-.total-likes,
-.hover-paragraph {
-  display: none;
-}
+    .comment-avatar{
+      margin-top: -18px; /* Ajusta este valor según sea necesario */
+      width: 20px
+    }
 
-.hover-icon:hover,
-.total-likes:hover,
-.hover-paragraph:hover {
-  display: inline;
-}
 
   
   

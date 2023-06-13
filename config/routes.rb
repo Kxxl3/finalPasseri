@@ -2,6 +2,10 @@ Rails.application.routes.draw do
   # Ruta para registro desde otras plataformas
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
+  # Ruta para errores
+  match '/posts', to: 'errors#not_found', via: :all
+  match '/users', to: 'errors#not_found', via: :all
+
   # Resto de tus rutas
   resources :posts do
     resources :comments, only: [:create, :destroy]
@@ -38,4 +42,8 @@ Rails.application.routes.draw do
       root to: 'devise/sessions#new' 
     end
   end
+
+  # Ruta comodín para capturar todas las rutas no especificadas
+  match '*path', to: 'errors#not_found', via: :all, constraints: lambda { |req| !req.path.starts_with?('/rails/active_storage/') }
+  
 end

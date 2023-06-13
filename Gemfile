@@ -39,6 +39,7 @@ gem 'acts_as_votable'
 gem 'followability', github: 'nejdetkadir/followability', branch: 'main'
 gem 'mime-types'
 gem 'turbo-rails'
+gem 'cancancan'
 
 
 # Use Active Storage variant
