@@ -1,4 +1,4 @@
-FROM render/ruby:3.0
+FROM ruby
 
 RUN apt-get update && apt-get install -y nodejs npm
 RUN npm install -g yarn
