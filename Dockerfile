@@ -10,7 +10,7 @@ WORKDIR /app_passeri
 COPY Gemfile Gemfile.lock ./
 
 # Instala las dependencias de la aplicación
-RUN bundle install --without development test
+RUN bundle install 
 
 # Agrega la ruta de ejecutables de bundler al PATH
 ENV PATH="/app_passeri/bin:${PATH}"
