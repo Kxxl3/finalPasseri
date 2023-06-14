@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_blank_name
+  
+
 
   def index
     @following_users = current_user.following

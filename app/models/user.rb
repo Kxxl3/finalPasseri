@@ -14,6 +14,8 @@ class User < ApplicationRecord
  has_many :comments
  has_one_attached :user_photo
  has_one_attached :cover
+ has_many :notifications, as: :recipient, dependent: :destroy
+ 
 
 
   def self.from_omniauth(access_token)

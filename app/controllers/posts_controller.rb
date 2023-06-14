@@ -3,6 +3,7 @@ class PostsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_post, only: %i[ show edit update destroy upvote]
 
+
   # GET /posts or /posts.json
   def index
     @posts = Post.all
@@ -38,10 +39,12 @@ class PostsController < ApplicationController
 
   def like
     @post = Post.friendly.find(params[:post_id])
+
     if current_user.liked? @post
       @post.unliked_by current_user
     else
       @post.liked_by current_user
+      create_like_notification(@post, current_user)
     end
 
     respond_to do |format|
@@ -97,6 +100,7 @@ class PostsController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_post
       @post = Post.friendly.find(params[:id])
@@ -105,5 +109,17 @@ class PostsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def post_params
       params.require(:post).permit(:user_id, :title, :file, :photo)
+    end
+
+    def create_like_notification(post, user)
+      unless @post.user == user
+        notification = post.user.notifications.create(
+          recipient: post.user,
+          actor: user,
+          action: 'liked',
+          notifiable: post
+        )
+        notification.send_notification
+      end
     end
 end

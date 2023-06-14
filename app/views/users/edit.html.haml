@@ -1,8 +1,25 @@
-.has-background-white.p-4
+.has-background-white.p-4.mt-4
   = form_with(model: @user, url: user_path(@user), method: :patch, local: true, multipart: true) do |form|
     / otros campos del formulario
 
     .field.is-white 
+      .field
+      .label.label
+        = form.label :name, class: "label"
+      .control
+        = form.text_field :name, class: "input"
+
+      - if @user.errors.has_key?(:name)
+        %p.error-message= @user.errors[:name].first
+
+    .field
+      .label.label
+        = form.label :bio, class: "label"
+      .control
+        = form.text_field :bio, class: "input"
+
+      - if @user.errors.has_key?(:bio)
+        %p.error-message= @user.errors[:bio].first
       .label.label
         = form.label :user_photo, class: "label"
       .control
@@ -28,26 +45,12 @@
       - if @user.errors.has_key?(:cover)
         %p.error-message= @user.errors[:cover].first
 
-    .field
-      .label.label
-        = form.label :bio, class: "label"
-      .control
-        = form.text_field :bio, class: "input"
-
-      - if @user.errors.has_key?(:bio)
-        %p.error-message= @user.errors[:bio].first
-
-    .field
-      .label.label
-        = form.label :name, class: "label"
-      .control
-        = form.text_field :name, class: "input"
-
-      - if @user.errors.has_key?(:name)
-        %p.error-message= @user.errors[:name].first
+    
 
     / botón de envío
     .field.has-text-centered
       .control
         %button.button.is-primary.is-medium.is-fullwidth{ type: "submit" } Guardar cambios
-        = link_to 'Back', posts_path, class: 'button is-danger is-centered is-fullwidth'
+        = link_to 'Volver atrás', "javascript:history.back()", class: 'button is-danger is-centered is-fullwidth'
+
+
