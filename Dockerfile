@@ -16,7 +16,7 @@ RUN bundle install
 ENV PATH="/app_passeri/bin:${PATH}"
 
 # Expone el puerto en el que tu aplicación escucha
-EXPOSE 10000
+EXPOSE 3000
 
 # Define el comando para iniciar tu aplicación
-CMD ["bundle", "exec", "rails", "server", "-p", "10000", "-b", "0.0.0.0"]
+CMD ["bundle", "exec", "rails", "server", "-p", "3000", "-b", "0.0.0.0"]
