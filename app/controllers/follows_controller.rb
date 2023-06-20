@@ -1,34 +1,34 @@
 class FollowsController < ApplicationController
     before_action :authenticate_user!
     before_action :set_user
-   
-
+  
     def follow
-        puts "este es el id"
-        puts @user
-        current_user.send_follow_request_to(@user)
-        @user.accept_follow_request_of(current_user)
-
-        redirect_to request.referrer
+      # Envía una solicitud de seguir al usuario
+      current_user.send_follow_request_to(@user)
+      # Acepta la solicitud de seguir del usuario actual
+      @user.accept_follow_request_of(current_user)
+  
+      # Redirige a la página anterior
+      redirect_to request.referrer
     end
-
-    def unfollow 
-        current_user.unfollow(@user)
-        redirect_to request.referrer
+  
+    def unfollow
+      # Deja de seguir al usuario
+      current_user.unfollow(@user)
+      # Redirige a la página anterior
+      redirect_to request.referrer
     end
-
-    private 
-
+  
+    private
+  
     def set_user
-        @user = User.find(params[:id])
-        # Si deseas mostrar un mensaje de error si el usuario no existe, puedes manejarlo de esta manera:
-        unless @user
-          flash[:error] = "Usuario no encontrado"
-          redirect_to root_path
-        end
+      # Encuentra al usuario con el ID proporcionado en los parámetros
+      @user = User.find(params[:id])
     end
-
+  
     def follow_params
-        params.permit(:id)
+      # Permite el parámetro ID
+      params.permit(:id)
     end
-end
+  end
+  

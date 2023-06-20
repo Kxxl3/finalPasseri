@@ -1,11 +1,10 @@
 .has-background-white.p-4.mt-4
   = form_with(model: @user, url: user_path(@user), method: :patch, local: true, multipart: true) do |form|
-    / otros campos del formulario
 
     .field.is-white 
       .field
       .label.label
-        = form.label :name, class: "label"
+        = form.label "Nombre", class: "label"
       .control
         = form.text_field :name, class: "input"
 
@@ -14,14 +13,14 @@
 
     .field
       .label.label
-        = form.label :bio, class: "label"
+        = form.label "Biografia", class: "label"
       .control
         = form.text_field :bio, class: "input"
 
       - if @user.errors.has_key?(:bio)
         %p.error-message= @user.errors[:bio].first
       .label.label
-        = form.label :user_photo, class: "label"
+        = form.label "Avatar del usuario", class: "label"
       .control
         .file.is-boxed.has-name
           .file-label
@@ -34,7 +33,7 @@
 
     .field
       .label.label
-        = form.label :cover, class: "label"
+        = form.label "fondo", class: "label"
       .control
         .file.is-boxed.has-name
           .file-label
@@ -45,9 +44,6 @@
       - if @user.errors.has_key?(:cover)
         %p.error-message= @user.errors[:cover].first
 
-    
-
-    / botón de envío
     .field.has-text-centered
       .control
         %button.button.is-primary.is-medium.is-fullwidth{ type: "submit" } Guardar cambios

@@ -2,8 +2,8 @@ Rails.application.routes.draw do
   # Ruta para registro desde otras plataformas
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
+  get '/users/search', to: 'users#search', as: 'user_search'
   # Ruta para errores
-  
   match '/users', to: 'errors#not_found', via: :all
 
   # Resto de tus rutas
@@ -24,11 +24,17 @@ Rails.application.routes.draw do
   
   get "/profile/:id", to: "users#profile", as: :profile
   get 'liked_posts', to: 'users#liked_posts'
-
+  
   get '/para_ti', to: 'posts#para_ti', as: 'para_ti'
   get '/seguidos', to: 'posts#seguidos', as: 'seguidos'
   get 'set_theme', to: 'theme#update'
+  get "/profile/:id/following", to: "users#following", as: :following
+  get "/profile/:id/followers", to: "users#followers", as: :followers
+ 
 
+
+
+  
   resources :users
   resources :posts
   # mount RailsAdmin::Engine => '/admin', as: 'rails_admin'

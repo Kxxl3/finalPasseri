@@ -20,7 +20,7 @@ class Post < ApplicationRecord
   private
 
   def validar_imagen
-    if photo.attached? && !photo.image?
+    if photo.attached? && !es_imagen?(photo)
       errors.add(:photo, "Debe ser una imagen válida")
     end
   end
@@ -32,7 +32,14 @@ class Post < ApplicationRecord
   end
 
   def es_cancion?(archivo)
-    MIME::Types.type_for(archivo.blob.filename.to_s).any? { |tipo| tipo.media_type == 'audio' }
+  extension = File.extname(archivo.blob.filename.to_s)[1..-1] # Obtener la extensión del archivo sin el punto inicial
+  tipos_audio = %w[mp3 wav ogg flac ] # Lista de extensiones de audio válidas
+  tipos_audio.include?(extension.downcase) # Comprobar si la extensión del archivo está en la lista de tipos de audio
   end
 
+  def es_imagen?(archivo)
+    extension = File.extname(archivo.blob.filename.to_s)[1..-1] # Obtiene la extensión del archivo sin el punto inicial
+    tipos_imagen = %w[jpg jpeg png gif raw] # Lista de extensiones de imagen válidas
+    tipos_imagen.include?(extension.downcase) # Comprueba si la extensión del archivo está en la lista de tipos de imagen
+  end
 end

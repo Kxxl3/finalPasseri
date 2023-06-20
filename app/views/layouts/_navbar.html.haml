@@ -16,6 +16,12 @@
           = link_to(liked_posts_path(@user)) do 
             %span.icon
               = fa_icon "heart"
+        %form.navbar-item.ml-6{action: user_search_path, method: "get"}
+          .field.has-addons
+            .control
+              %input.input{name: "query", placeholder: "Buscar usuarios", type: "text"}/
+            .control
+              %button.button.is-primary{type: "submit"} Buscar
 
       .navbar-end
         .navbar-item

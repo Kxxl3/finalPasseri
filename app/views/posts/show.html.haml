@@ -4,27 +4,36 @@
       .card-content.is-centered
         .media
           .media-left
-            .image.is-64x64
+            .image.is-90x90
               - if @post.photo.attached?
                 = link_to(image_tag(@post.photo, class: "image-zoom"), "#")
               - else
                 = link_to(image_tag("https://bulma.io/images/placeholders/64x64.png", alt: "Image", class: "image-zoom"), "#")
           .media-content
-            %p#notice= notice
             %p
-              %strong Title:
+              %strong Titulo:
               = @post.title
+            %p
+              %strong Artista:
+              = link_to profile_path(@post.user) do
+                = print_username(@post.user)
             %br
             - if @post.file.attached?
-              %audio{controls: ""}
-                %source{src: "#{rails_blob_url(@post.file)}", type: "#{@post.file.content_type}"}
-            - else
-              No file attached
+              .audio-wrapper
+                %audio{controls: ""}
+                  %source{src: "#{rails_blob_url(@post.file)}", type: "#{@post.file.content_type}"}
         .level
           .level-left
             .level-item
               %button.button.is-primary.is-medium.is-fullwidth{type: "button"}
                 = link_to "Volver atrás", "javascript:history.back()", class: "has-text-white"
+          .level-right
+            .level-item
+              - if @post.user == current_user
+                = button_to post_path(@post), method: :delete, data: { confirm: "¿Estás seguro de que deseas eliminar este post?" }, class: 'button is-danger is-rounded ml-5 p-1' do
+                  = fa_icon "trash"
+
+
 
     = render "comments/form"
     %br

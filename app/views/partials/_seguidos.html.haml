@@ -3,4 +3,5 @@
     - user.posts.each do |post|
       = render "partials/post_card", post: post
 - else
-  %h1.has-text-white.is-size-4.mt-6 Aun no sigues a ningun usuario!
+  .notification.is-danger
+    Aun no sigues a ningún usuario
